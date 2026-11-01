@@ -1,4 +1,0 @@
-{
-  "name":"voiceforge","private":true,"version":"0.1.0","description":"Self-hosted voice rooms",
-  "scripts":{"install:server":"npm --prefix server install","install:client":"npm --prefix client install","dev:server":"npm --prefix server run dev","dev:client":"npm --prefix client run dev","build:client":"npm --prefix client run build","dist:win":"npm --prefix client run dist:win"}
-}
