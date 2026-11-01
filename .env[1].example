@@ -1,0 +1,5 @@
+JWT_SECRET=replace-with-a-unique-random-secret-of-at-least-32-characters
+LIVEKIT_URL=wss://vtmk.hu
+LIVEKIT_API_KEY=voiceforge
+LIVEKIT_API_SECRET=replace-with-the-same-unique-32-character-secret-used-in-livekit.yaml
+ALLOWED_ORIGINS=https://vtmk.hu

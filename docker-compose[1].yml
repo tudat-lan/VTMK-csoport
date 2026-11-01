@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      PORT: 8080
+      DB_PATH: /data/voiceforge.sqlite
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
+      LIVEKIT_URL: ${LIVEKIT_URL:?Set public wss URL in Portainer}
+      LIVEKIT_API_KEY: ${LIVEKIT_API_KEY:?Set LiveKit API key in Portainer}
+      LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET:?Set LiveKit API secret in Portainer}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-https://vtmk.hu}
+      SCREEN_PUBLISH_PORT: 7900
+      SCREEN_VIEW_PORT: 7901
+    volumes:
+      - voiceforge_data:/data
+    ports:
+      - "8080:8080"
+      - "127.0.0.1:17900:7900/tcp"
+      - "127.0.0.1:17901:7901/tcp"
+    depends_on: [livekit]
+  livekit:
+    image: livekit/livekit-server:v1.8
+    restart: unless-stopped
+    command: --config /etc/livekit.yaml
+    volumes:
+      - ./livekit.yaml:/etc/livekit.yaml:ro
+    ports:
+      - "7880:7880/tcp"
+      - "7881:7881/tcp"
+      - "50000-60000:50000-60000/udp"
+volumes:
+  voiceforge_data:
+
